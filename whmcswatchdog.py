@@ -2,6 +2,7 @@ import requests
 import datetime
 import time
 import os
+import loguru
 
 # 配置参数
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -24,7 +25,7 @@ def send_telegram_message(message):
         'parse_mode': 'Markdown'
     }
     response = requests.post(url, json=payload)
-    print('Telegram response:', response.text)
+    logger.info('Telegram response:', response.text)
 
 def send_serverchan_message(title, message):
     """通过Server酱发送消息"""
@@ -34,11 +35,11 @@ def send_serverchan_message(title, message):
         'desp': message
     }
     response = requests.post(url, data=data)
-    print('Server酱 response:', response.text)
+    logger.info('Server酱 response:', response.text)
 
 def main():
 
-    print("Start Monitoring！:-)")
+    logger.info("Start Monitoring！:-)")
     
     previous_available = False
 
@@ -50,22 +51,22 @@ def main():
             send_telegram_message(message)
             send_serverchan_message("商品有货通知", message)
             previous_available = True
-            print('有货通知已发送')
+            logger.info('有货通知已发送')
 
         elif not stock_available and not previous_available:
             message = "产品已售罄。"
             #send_telegram_message(message)
             #send_serverchan_message("商品售罄通知", message)
             #previous_available = False
-            #print('售罄通知已发送')
-            print(message)
+            #logger.info('售罄通知已发送')
+            logger.info(message)
 
         elif not stock_available and previous_available:
             message = "已抢完,售罄通知已发送"
             send_telegram_message(message)
             #send_serverchan_message("商品售罄通知", message)
             previous_available = False
-            print(message)
+            logger.info(message)
 
         time.sleep(300)  # 每10分钟检查一次
 
