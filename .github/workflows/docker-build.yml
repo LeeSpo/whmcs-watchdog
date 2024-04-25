@@ -6,12 +6,12 @@ permissions:
 
 on:
   workflow_dispatch:
-  #push:
-    #branches:
-      #- main  # 根据你的分支情况调整
-  #pull_request:
-    #branches:
-      #- main
+  push:
+    branches:
+      - main  # 根据你的分支情况调整
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
