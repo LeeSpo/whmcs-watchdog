@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 复制脚本文件到容器中
-COPY script.py .
+COPY whmcswatchdog.py .
 
 # 设置环境变量（实际使用时应通过Docker命令行或compose文件设置环境变量，以保护敏感信息）
 ENV TELEGRAM_BOT_TOKEN=telegram_bot_token
