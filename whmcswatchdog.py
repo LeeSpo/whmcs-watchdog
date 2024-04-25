@@ -2,7 +2,7 @@ import requests
 import datetime
 import time
 import os
-import loguru
+import loguru import logger
 
 # 配置参数
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
