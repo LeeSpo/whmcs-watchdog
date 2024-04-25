@@ -34,7 +34,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/leespo/whmcs_watchdog_beta:latest
+        tags: ghcr.io/leespo/whmcs_watchdog:latest
 
     - name: Cleanup
       uses: docker/build-push-action@v2
