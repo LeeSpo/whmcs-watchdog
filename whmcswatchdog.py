@@ -1,12 +1,13 @@
 import requests
 import datetime
 import time
+import os
 
 # 配置参数
-TELEGRAM_BOT_TOKEN = 'telegram_bot_token'  # 从环境变量获取
-TELEGRAM_CHAT_ID = 'telegram_chat_id'     # 从环境变量获取
-SERVERCHAN_KEY = 'serverchan_key'         # 从环境变量获取
-PRODUCT_URL = 'product_url'  # 从环境变量获取
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+SERVERCHAN_KEY = os.getenv('SERVERCHAN_KEY')
+PRODUCT_URL = os.getenv('PRODUCT_URL')
 
 def check_stock(url):
     """检查商品库存状态"""
