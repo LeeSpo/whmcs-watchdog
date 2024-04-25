@@ -40,7 +40,8 @@ def send_serverchan_message(title, message):
 def main():
 
     logger.info("Start Monitoring！:-)")
-    
+    send_telegram_message("I'm Online now.")
+    send_serverchan_message("I'm Online now.")
     previous_available = False
 
     while True:
