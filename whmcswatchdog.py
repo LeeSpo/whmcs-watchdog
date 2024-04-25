@@ -29,7 +29,7 @@ def send_telegram_message(message):
 
 def send_serverchan_message(title, message):
     """通过Server酱发送消息"""
-    url = f"https://sc.ftqq.com/{SERVERCHAN_KEY}.send"
+    url = f"https://sct.ftqq.com/{SERVERCHAN_KEY}.send"
     data = {
         'text': title,
         'desp': message
