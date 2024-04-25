@@ -13,12 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 复制脚本文件到容器中
 COPY whmcswatchdog.py .
 
-# 设置环境变量（实际使用时应通过Docker命令行或compose文件设置环境变量，以保护敏感信息）
-ENV TELEGRAM_BOT_TOKEN=telegram_bot_token
-ENV TELEGRAM_CHAT_ID=telegram_chat_id
-ENV SERVERCHAN_KEY=serverchan_key
-ENV PRODUCT_URL =product_url_withid
-
+# 提示Docker这些环境变量将由外部配置
+ENV TELEGRAM_BOT_TOKEN=
+ENV TELEGRAM_CHAT_ID=
+ENV SERVERCHAN_KEY=
+ENV PRODUCT_URL=
 
 # 容器启动时执行Python脚本
 CMD ["python", "./whmcswatchdog.py"]
