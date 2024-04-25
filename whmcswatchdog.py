@@ -12,7 +12,7 @@ def check_stock(url):
     """检查商品库存状态"""
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'}
     response = requests.get(url, headers=headers)
-    return 'out of stock' not in response.text
+    return '缺貨中' not in response.text
 
 def send_telegram_message(message):
     """通过Telegram机器人发送消息"""
@@ -36,21 +36,33 @@ def send_serverchan_message(title, message):
     print('Server酱 response:', response.text)
 
 def main():
-    stock_was_available = False
+    previous_available = False
+
     while True:
         stock_available = check_stock(PRODUCT_URL)
-        if stock_available and not stock_was_available:
+
+        if stock_available and not previous_available:
             message = "产品现已有货！快来购买： " + PRODUCT_URL
             send_telegram_message(message)
             send_serverchan_message("商品有货通知", message)
-            stock_was_available = True
+            previous_available = True
             print('有货通知已发送')
-        elif not stock_available and stock_was_available:
+
+        elif not stock_available and not previous_available:
             message = "产品已售罄。"
             #send_telegram_message(message)
             #send_serverchan_message("商品售罄通知", message)
-            #stock_was_available = False
+            #previous_available = False
             #print('售罄通知已发送')
+            print(message)
+
+        elif not stock_available and previous_available:
+            message = "已抢完,售罄通知已发送"
+            send_telegram_message(message)
+            #send_serverchan_message("商品售罄通知", message)
+            previous_available = False
+            print(message)
+
         time.sleep(300)  # 每10分钟检查一次
 
 if __name__ == "__main__":
