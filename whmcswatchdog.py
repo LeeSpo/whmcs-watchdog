@@ -37,6 +37,9 @@ def send_serverchan_message(title, message):
     print('Server酱 response:', response.text)
 
 def main():
+
+    print("Start Monitoring！:-)")
+    
     previous_available = False
 
     while True:
